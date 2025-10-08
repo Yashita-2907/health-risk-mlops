@@ -5,7 +5,7 @@ from sklearn.metrics import classification_report
 import joblib
 
 # Load Dataset
-data = pd.read_csv('data/raw/diabetes.csv')
+data = pd.read_csv('data/raw/pima_diabetes.csv')
 
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]

@@ -2,13 +2,19 @@ stages:
   preprocess:
     cmd: python src/preprocess.py
     deps:
-      - data/raw/pima_diabetes.csv
+    - data/raw/pima_diabetes.csv
     outs:
-      - data/processed/clean_data.csv
+    - data/processed/clean_data.csv
 
   train:
-    cmd: python src/train_model.py
+    cmd: python src/train.py
     deps:
-      - data/processed/clean_data.csv
+    - data/processed/clean_data.csv
+    - src/train.py
     outs:
-      - models/diabetes_model.pkl
+    - models/diabetes_model.pkl
+    params:
+    - train
+    metrics:
+    - metrics/scores.txt:
+        cache: false

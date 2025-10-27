@@ -20,9 +20,9 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install dvc[all]
+  run: |
+    pip install --upgrade pip
+    pip install --no-cache-dir -r requirements.txt
 
       - name: Reproduce DVC pipeline
         run: dvc repro

@@ -3,24 +3,61 @@ stages:
   preprocess:
     cmd: python src/preprocess.py
     deps:
+    - path: data/raw/heart_disease_uci.csv
+      hash: md5
+      md5: bde77728726675cb665f948df8ade988
+      size: 79346
     - path: data/raw/pima_diabetes.csv
       hash: md5
       md5: 2fef5f3fd179b50c71a85a8f6b7d6e93
       size: 23875
+    - path: src/preprocess.py
+      hash: md5
+      md5: e649db575b293d05a430f6d790e00e55
+      size: 2000
     outs:
-    - path: data/processed/clean_data.csv
+    - path: data/processed/clean_diabetes.csv
       hash: md5
       md5: f8183aa843a1f37607d7bc1131626f1b
       size: 24059
+    - path: data/processed/clean_heart.csv
+      hash: md5
+      md5: dc6d0f2e4c7a8e6300c9f85c7e37e26f
+      size: 34813
   train:
     cmd: python src/train_model.py
     deps:
-    - path: data/processed/clean_data.csv
+    - path: data/processed/clean_diabetes.csv
       hash: md5
       md5: f8183aa843a1f37607d7bc1131626f1b
       size: 24059
+    - path: data/processed/clean_heart.csv
+      hash: md5
+      md5: dc6d0f2e4c7a8e6300c9f85c7e37e26f
+      size: 34813
+    - path: src/train_model.py
+      hash: md5
+      md5: 6e31ef246053d2069ecad658c0780c59
+      size: 3073
+    params:
+      params.yaml:
+        train:
+          test_size: 0.2
+          random_state: 42
+          n_estimators: 20
+          max_depth: 5
+          min_samples_split: 2
+          min_samples_leaf: 1
     outs:
+    - path: metrics/scores.txt
+      hash: md5
+      md5: c36fb310653f7bc6eae13b713a00cfbd
+      size: 179
     - path: models/diabetes_model.pkl
       hash: md5
-      md5: f6f23ec0a0a1e278b16a13589b0dec74
-      size: 1709465
+      md5: bf3a73c49cbefbe362f35b5b7ff7496a
+      size: 87209
+    - path: models/heart_model.pkl
+      hash: md5
+      md5: 23df3887dc180bbacac88ce110a3c971
+      size: 109889

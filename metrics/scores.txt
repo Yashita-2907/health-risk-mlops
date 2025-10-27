@@ -1,0 +1,9 @@
+=== Diabetes Model ===
+Accuracy: 0.7468
+F1 (Class 0): 0.8040
+F1 (Class 1): 0.6422
+
+=== Heart Disease Model ===
+Accuracy: 0.6000
+F1 (Class 0): 0.8293
+F1 (Class 1): 0.1176

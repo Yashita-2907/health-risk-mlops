@@ -2,19 +2,24 @@ stages:
   preprocess:
     cmd: python src/preprocess.py
     deps:
-    - data/raw/pima_diabetes.csv
+      - data/raw/pima_diabetes.csv
+      - data/raw/heart_disease_uci.csv
+      - src/preprocess.py
     outs:
-    - data/processed/clean_data.csv
+      - data/processed/clean_diabetes.csv
+      - data/processed/clean_heart.csv
 
   train:
-    cmd: python src/train.py
+    cmd: python src/train_model.py
     deps:
-    - data/processed/clean_data.csv
-    - src/train.py
+      - data/processed/clean_diabetes.csv
+      - data/processed/clean_heart.csv
+      - src/train_model.py
     outs:
-    - models/diabetes_model.pkl
+      - models/diabetes_model.pkl
+      - models/heart_model.pkl
     params:
-    - train
+      - train
     metrics:
-    - metrics/scores.txt:
-        cache: false
+      - metrics/scores.txt:
+          cache: false
